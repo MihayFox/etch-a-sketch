@@ -7,8 +7,13 @@ for (let i = 1; i <= 16; i++) {
     for (let j = 1; j <= 16; j++) {
         let cell = document.createElement('div');
         cell.classList.add('cell');
+        cell.addEventListener('mousedown', event => {
+            event.preventDefault();
+        });
+        
         cell.addEventListener('mouseover', () => {
-            cell.style.backgroundColor = 'black';
+            cell.style.backgroundColor = randomRGB();
+            cell.style.opacity = parseFloat(getComputedStyle(cell).opacity) + 0.1;
         })
         row.appendChild(cell);
     }
@@ -26,5 +31,10 @@ function clear() {
 let resetButton = document.querySelector(".reset");
 resetButton.addEventListener('click', clear);
 
-
+let randomRGB = () => {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+}
 
